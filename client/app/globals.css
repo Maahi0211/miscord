@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInLeft {
+  animation: fadeInLeft 0.5s ease-out forwards;
+}
+
+.animate-fadeInRight {
+  animation: fadeInRight 0.5s ease-out forwards;
+}
+
+.animate-fadeInDown {
+  animation: fadeInDown 0.5s ease-out forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+/* Add to your existing animations */
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes notification {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-notification-0 {
+  animation: notification 4s ease-in-out infinite;
+}
+
+.animate-notification-1 {
+  animation: notification 4s ease-in-out infinite;
+}
+
+.animate-notification-2 {
+  animation: notification 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+
+/* Add to your existing animations */
+
+@keyframes floating-blob {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  20% {
+    transform: translate(40px, -50px) scale(1.1) rotate(45deg);
+  }
+  40% {
+    transform: translate(-40px, 60px) scale(0.9) rotate(90deg);
+  }
+  60% {
+    transform: translate(50px, 30px) scale(1.05) rotate(180deg);
+  }
+  80% {
+    transform: translate(-30px, -40px) scale(0.95) rotate(270deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(360deg);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-slow {
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+}
+
+.animate-floating-blob {
+  animation: floating-blob 20s ease-in-out infinite;
+}
+
+.animate-floating-blob-delayed-1 {
+  animation: floating-blob 25s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.animate-floating-blob-delayed-2 {
+  animation: floating-blob 22s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+.animate-floating-blob-delayed-3 {
+  animation: floating-blob 28s ease-in-out infinite;
+  animation-delay: -15s;
+}
+
+/* Optional: Add a subtle noise texture overlay */
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.glass-effect {
+  @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg shadow-black/10;
+}
+
+.glass-card {
+  @apply glass-effect hover:bg-white/15 transition-all duration-300;
+}
+
+/* Optional: Add a subtle gradient to glass elements */
+.glass-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+}

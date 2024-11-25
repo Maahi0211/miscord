@@ -2,8 +2,15 @@ package com.miscord.server.service;
 
 import com.miscord.server.model.User;
 import com.miscord.server.repo.UserRepo;
+import com.miscord.server.util.JwtUtil;
+import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +22,12 @@ public class UserService {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -35,15 +48,27 @@ public class UserService {
 
     public ResponseEntity<Map<String, String>> loginUser(User user) {
         Map<String, String> response = new HashMap<>();
-        User existingUser = userRepo.findByEmail(user.getEmail()).orElse(null);
-
-        if (existingUser == null || !passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-            response.put("message", "Invalid email or password.");
+        
+        try {
+            // Attempt authentication
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+            );
+            
+            // If authentication is successful, set it in the security context
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            
+            // Generate JWT token
+            String jwt = jwtUtil.generateToken(user.getEmail());
+            
+            response.put("message", "Login successful");
+            response.put("token", jwt);
+            return ResponseEntity.ok(response);
+            
+        } catch (AuthenticationException e) {
+            response.put("message", "Invalid email or password");
             return ResponseEntity.status(401).body(response);
         }
-
-        response.put("message", "Login successful.");
-        return ResponseEntity.ok(response);
     }
 }
 
