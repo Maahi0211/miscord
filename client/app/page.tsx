@@ -124,7 +124,7 @@ export default function LandingPage() {
             <div className="text-center">
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 animate-fadeInUp">
                 Your Place to Talk{" "}
-                <span className="text-[#5865F2]">and Connect Globally</span>
+                <span className="text-[#5865F2]">and Connect</span>
               </h1>
 
               <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 animate-fadeInUp animation-delay-200">
